@@ -6,28 +6,42 @@
 
 namespace Binovo\ElkarBackupBundle\Entity;
 
-use Binovo\ElkarBackupBundle\Lib\Globals;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\SerializedName;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
-use Symfony\Component\Security\Core\Validator\Constraint as SecurityAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  *
  * @ORM\Entity
+ * @ExclusionPolicy("all")
  */
 class User implements AdvancedUserInterface
 {
     const SUPERUSER_ID = 1;
+
     /**
+     * @var integer
+     *
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Expose
+     * @SerializedName("id")
+     * @Groups({"user-basic", "user-detail"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=25, unique=true)
+     *
+     * @Expose
+     * @SerializedName("username")
+     * @Groups({"user-basic", "user-detail"})
      */
     private $username;
 
@@ -44,11 +58,19 @@ class User implements AdvancedUserInterface
 
     /**
      * @ORM\Column(type="string", length=60, unique=false)
+     *
+     * @Expose
+     * @SerializedName("email")
+     * @Groups({"user-detail"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="boolean")
+     *
+     * @Expose
+     * @SerializedName("isActive")
+     * @Groups({"user-basic", "user-detail"})
      */
     private $isActive;
 

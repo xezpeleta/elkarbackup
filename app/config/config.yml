@@ -72,6 +72,12 @@ monolog:
             type:  firephp
             level: info
 
+fos_rest:
+    routing_loader:
+        default_format: json
+    exception:
+        enabled: true
+
 services:
     BnvWebLogger:
         class: Symfony\Bridge\Monolog\Logger
@@ -118,5 +124,6 @@ services:
     Tahoe:
         class: Binovo\ElkarTahoeBundle\Utils\TahoeBackup
         arguments: ["@BnvWebLogger", %home%]
+
 parameters:
     supported_locales: [es, en, eu, de]
