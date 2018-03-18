@@ -9,15 +9,7 @@ logout:
 binovo_elkar_tahoe:
     resource: "@BinovoElkarTahoeBundle/Controller/"
     type:     annotation
-
-api_get_users:
-    pattern:  /api/users
-    defaults: { _controller: BinovoElkarBackupBundle:Api:getUsers, _format: json }
-    requirements:
-        _method: GET
-api_get_user:
-    pattern:  /api/users/{id}
-    defaults: { _controller: BinovoElkarBackupBundle:Api:getUser, _format: json }
-    requirements:
-        _method: GET
-        id: "\d+"
+binovo_elkar_api:
+    resource: "@BinovoElkarBackupBundle/Api"
+    type:     rest
+    prefix:   /api
