@@ -9,5 +9,5 @@ jobs:
       - uses: actions/checkout@v1
       - name: Run test suite
         run: |
-          docker-compose -f docker/test/docker-compose.yml up -d \
-          && docker-compose -f docker/test/docker-compose.yml run elkarbackup /run-tests.sh
+          docker-compose -f docker/test/docker-compose.yml up -d; \
+          docker-compose -f docker/test/docker-compose.yml run elkarbackup /run-tests.sh
