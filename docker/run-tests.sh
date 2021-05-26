@@ -1,4 +1,5 @@
-source /envars.sh
+# Run entrypoint
+/entrypoint.sh
 
 # Run tests
 cd /app/elkarbackup/

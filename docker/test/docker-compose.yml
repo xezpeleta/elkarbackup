@@ -1,10 +1,11 @@
 version: '3'
 
 services:
-  elkarbackup:
+  elkarbackup-test:
     build:
       context: ../..
       dockerfile: ./docker/Dockerfile
+    command: /run-tests.sh
     environment:
       DATABASE_HOST: db
       DATABASE_NAME: elkarbackuptests
