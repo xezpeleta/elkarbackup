@@ -101,6 +101,11 @@ RUN ln -sf /proc/1/fd/1 /var/log/output.log
 RUN ln -snf /usr/share/zoneinfo/Europe/Paris /etc/localtime && echo "Europe/Paris" > /etc/timezone
 RUN printf '[PHP]\ndate.timezone = "Europe/Paris"\n' > /usr/local/etc/php/conf.d/tzone.ini
 
+# Automated tests
+COPY $DOCKERDIR/run-tests.sh /
+RUN chmod u+x /run-tests.sh
+
+# Entrypoint and environment variables
 COPY $DOCKERDIR/entrypoint.sh /
 COPY $DOCKERDIR/envars.sh /
 RUN chmod u+x /entrypoint.sh
