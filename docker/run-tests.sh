@@ -1,3 +1,5 @@
+source /envars.sh
+
 # Run entrypoint
 /entrypoint.sh
 
