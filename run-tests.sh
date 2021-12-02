@@ -8,10 +8,12 @@ $DIR/bin/console doctrine:database:create
 $DIR/bin/console doctrine:migrations:migrate --no-interaction
 
 if [ "$EUID" -ne 0 ]; then
-  # sudo required
+  echo "Checking permissions... sudo required:"
+  pwd
+  ls composer.json
   sudo --preserve-env $DIR/bin/console elkarbackup:create_admin
 else
-  # already root
+  echo "Checking permissions... already root!"
   # do not use sudo (GitHub Actions does not like it)
   pwd
   ls composer.json
