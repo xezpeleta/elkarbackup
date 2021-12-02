@@ -6,7 +6,8 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 $DIR/bin/console doctrine:database:drop --force
 $DIR/bin/console doctrine:database:create
 $DIR/bin/console doctrine:migrations:migrate --no-interaction
-if [ "$EUID" -ne 0 ]
+
+if [ "$EUID" -ne 0 ]; then
   # sudo required
   sudo --preserve-env $DIR/bin/console elkarbackup:create_admin
 else
@@ -14,6 +15,7 @@ else
   # do not use sudo (GitHub Actions does not like it)
   $DIR/bin/console elkarbackup:create_admin
 fi
+
 mkdir -p /tmp/elkarbackup-tests/uploads
 $DIR/bin/console hautelook:fixtures:load --append
 $DIR/bin/phpunit "${@:1}"
