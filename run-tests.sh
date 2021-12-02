@@ -6,7 +6,14 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 $DIR/bin/console doctrine:database:drop --force
 $DIR/bin/console doctrine:database:create
 $DIR/bin/console doctrine:migrations:migrate --no-interaction
-sudo --preserve-env $DIR/bin/console elkarbackup:create_admin 
+if [ "$EUID" -ne 0 ]
+  # sudo required
+  sudo --preserve-env $DIR/bin/console elkarbackup:create_admin
+else
+  # already root
+  # do not use sudo (GitHub Actions does not like it)
+  $DIR/bin/console elkarbackup:create_admin
+fi
 mkdir -p /tmp/elkarbackup-tests/uploads
 $DIR/bin/console hautelook:fixtures:load --append
 $DIR/bin/phpunit "${@:1}"
