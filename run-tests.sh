@@ -13,6 +13,8 @@ if [ "$EUID" -ne 0 ]; then
 else
   # already root
   # do not use sudo (GitHub Actions does not like it)
+  pwd
+  ls composer.json
   $DIR/bin/console elkarbackup:create_admin
 fi
 
